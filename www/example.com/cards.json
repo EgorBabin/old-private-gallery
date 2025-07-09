@@ -1,0 +1,29 @@
+[
+        {
+        "year": "год",
+        "category": "категория (будет в url)",
+        "image": "Картинка привью",
+        "title": "Название",
+        "icon": "Иконка у названия",
+        "amt": "количество фотографий",
+        "video": "количество видео"
+    },
+    {
+        "year": "2010",
+        "category": "wummer",
+        "image": "S2010.jpg",
+        "title": "Лето",
+        "icon": "summer.svg",
+        "amt": "50",
+        "video": "15"
+    },
+        {
+        "year": "2000",
+        "category": "winter",
+        "image": "W2025.jpg",
+        "title": "Зима",
+        "icon": "winter.svg",
+        "amt": "20",
+        "video": "4"
+    }
+]

@@ -1,0 +1,533 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: rgb(0, 0, 0);
+}
+
+a, button {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+:root {
+  --body-bg: #25201a;
+  --body-color: #ededed;
+  --color1: rgb(255, 255, 252);
+  --color2: #FEB47B;
+  --color3: #ff9073;
+  --link-a: #FF6B6B; /*ссылки*/
+  --b-w: #000; /* белая - черная, черная - белая*/
+  --img-b-sh: 0 0 8px 8px #444;
+  --child-photo: 16px;
+}
+
+html {
+  scroll-behavior: smooth;
+  max-width: 100dvw;
+  -webkit-user-select: none; /* Поддержка для Safari и Safari на iOS */
+  -moz-user-select: none;    /* Поддержка для Firefox */
+  -ms-user-select: none;     /* Поддержка для IE 10+ */
+  user-select: none;         /* Стандартное свойство */
+}
+
+body {
+  overflow-x: hidden;
+  color: var(--color1);
+  background: var(--body-bg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  font-family: "Nunito", sans-serif;
+  animation: load 0.3s ease;
+}
+
+@keyframes load {
+  0% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* контейнер для карточке в индексе */
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+  grid-gap: 0.25%;
+  margin: 2%;
+  margin-bottom: 30%;
+}
+
+@media (min-width: 1100px) { /* 275px * 4 = 1100px */
+  .container {
+    grid-template-columns: repeat(4, minmax(275px, 1fr));
+  }
+}
+
+.container.anim {
+  opacity: 0.2;
+}
+
+.container a {
+  text-decoration: none;
+}
+
+.container h4  {
+  color: var(--color1);
+  font-size: 1.8rem;
+  font-weight: 550;
+  margin: 10px 0 0 10px;
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+  align-items: baseline;
+}
+
+.container .icotext {
+  height: 1cap;
+  aspect-ratio: 1;
+  filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.4));
+}
+  
+.container h5 {
+  color: var(--color1);
+  font-size: 1rem;
+  margin: 10px 0 0 10px; /* Убираем верхний отступ */
+  text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+  margin-top: auto; /* Прижимаем h4 к нижней части карточки */
+  font-weight: normal;
+}
+
+.icotext {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* карточки в индексе */
+.card {
+  height: 215px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  transition: 0.1s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.card a {
+    border-radius: 0%;
+    width: 24px;
+    height: 24px;
+    filter: drop-shadow(0px 0px 5px black);
+}
+
+h2 {
+  color: var(--color1);
+  font-size: 2.5rem;
+}
+
+h3 {
+  color: var(--color1);
+  font-size: 2rem;
+  margin: 20px 0 0 20px;
+  text-shadow: 0px 0px 5px black;
+}
+
+/* Карточка */
+.card {
+  position: relative; /* Добавлено */
+  overflow: hidden; /* Чтобы изображение не выходило за границы */
+  display: flex; /* Выравниваем элементы */
+  flex-direction: column; /* Чтобы текст и картинка были столбцом */
+  align-items: flex-start; /* Выравниваем текст */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transition: 0.3s;
+
+  &:active {
+    transform: scale(1.035);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.9);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: 0.3s;
+  }
+}
+
+.imgc {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 110%;
+  width: 100%;
+  z-index: -1;
+  object-fit: cover;
+}
+
+/* галерея */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 5px;
+  padding: 5px;
+
+  @media (min-width: 750px) { /* 150px * 5 = 750px */
+    & {
+      grid-template-columns: repeat(5, minmax(150px, 1fr)); /* Ограничение до 5 колонок */
+    }
+  }
+
+  &.anim {
+    opacity: 0.2;
+  }
+}
+
+.photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover; /* Обрезка изображения, чтобы оно заполнило контейнер */
+  border-radius: 5px 10px;
+  cursor: pointer;
+  transition: transform 0.15s ease-in-out, opacity 0.3s ease;
+  background: linear-gradient(90deg, #16130f 25%, #342d25 50%, #16130f 75%);
+  background-size: 200% 100%;
+  animation: loading 2s infinite; /* Анимация скелетона */
+  opacity: 0.7; /* Немного прозрачности, чтобы скелет был заметен */
+}
+
+/* Стили для активного состояния изображения */
+.photo:active {
+  transform: scale(1.05);
+  outline: var(--link-a) solid 2px;
+}
+
+/* Стили для четных изображений */
+.photo:nth-child(even) {
+  transform: translateY(var(--child-photo));
+}
+
+.photo:nth-child(even):active {
+  transform: translateY(var(--child-photo));
+  transform: scale(1.05);
+  outline: var(--link-a) solid 2px;
+}
+
+/* Когда изображение загружено, убираем анимацию */
+.photo.loaded {
+  background: none;
+  opacity: 1; /* Снимаем прозрачность */
+}
+
+
+/* прогресс бар, отображает скролл на странице */
+.progress-bar {
+  height: 0.35rem;
+  width: 0%;
+  position: fixed;
+  border-radius: 0 0 0.35rem 0;
+  top: 0;
+  z-index: 200;
+
+  background: linear-gradient(90deg, rgba(255, 107, 107, 0.5) 0%, rgba(254, 180, 123, 0.5) 50%);
+  box-shadow: 0 8px 32px 0 rgba(255, 107, 107, 0.2);
+  backdrop-filter: blur( 4px );
+  -webkit-backdrop-filter: blur( 4px );
+}
+
+/* загрузка - прелоадер скелетон */
+.skelet {
+  transform: translate3d(0, 0, 0); /* Активирует GPU */
+  backface-visibility: hidden;
+  will-change: background-position;
+  width: 100%;
+  aspect-ratio: 3 / 4; /* Соотношение сторон 1:1 */
+  background-attachment: fixed;
+  background: linear-gradient(90deg, #FEB47B 25%, #ff9073 50%, #FEB47B 75%);
+  background-size: 200% 100%;
+  animation: loading 2s infinite;
+  border-radius: 5px 10px;
+}
+
+/* Анимация для эффекта перелива для скелетона */
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* картинка на весь экран (открытие оригинала) */
+.lightbox {
+  z-index: 201;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(15px); /* Поддержка для Safari и Safari на iOS */
+  backdrop-filter: blur(15px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+
+  & img {
+    max-width: 95vw;
+    max-height: 95vh;
+    border-radius: 3px 6px;
+    transition: transform 0.3s ease-in-out;
+  }
+  &.show {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* видео */
+/* Стили для контейнера видео */
+.videobox-container {
+  position: relative;
+  max-width: 100dvw;
+  max-height: 95dvh;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  top: 6em;
+}
+
+/* Стили для видео */
+.videobox {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+  display: none;
+  z-index: 200;
+  width: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  position: relative;
+  bottom: 95px;
+
+  &.show {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* Стили для уведомления */
+.notification {
+  position: fixed;
+  max-width: 80dvw;
+  top: 1.5dvw;
+  right: 1.5dvw;
+  background-color: var(--color2);
+  color: var(--color1);
+  padding: 10px 20px;
+  border-radius: 3px 6px;
+  z-index: 1000;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+
+  &.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1) translateY(80px); /* Начальное состояние: нормальный размер и смещение вниз */
+    opacity: 0.5;
+  }
+  10% {
+    transform: scale(1.05) translateY(80px); /* Увеличение масштаба, смещение остаётся */
+    opacity: 1;
+  }
+  20% {
+    transform: scale(1) translateY(0); /* Возврат к нормальному размеру и подъём вверх */
+  }
+  94% {
+    transform: scale(1) translateY(0); /* Состояние перед пульсацией */
+  }
+  97% {
+    transform: scale(1.05) translateY(0); /* Пульсация */
+  }
+  100% {
+    transform: scale(1) translateY(0); /* Возврат к нормальному размеру */
+  }
+}
+
+/* svg'шка показывающие что это видео */
+.image-container {
+  position: relative;
+  display: inline-block;
+
+  &:nth-child(even) {
+    transform: translateY(var(--child-photo));
+  }
+
+  & svg {
+    --color-start: #FF7E5F; /* Начальный цвет */
+    --color-end: #FEB47B;   /* Конечный цвет */
+  }
+}
+.overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px; /* Размер SVG-иконки */
+  height: 50px;
+  pointer-events: none; /* Чтобы клики проходили сквозь иконку */
+  filter: drop-shadow(2px 2px 4px var(--img-b-sh));
+}
+
+/* длинная кнопка */
+.btn {
+  text-align: center;
+  display: block;
+  position: relative;
+  text-decoration: none;
+  padding: 0.6em 2em;
+  background: linear-gradient(-10deg, rgba(255, 107, 107) 0%, rgba(254, 180, 123) 50%);
+  color: var(--color1);
+  cursor: pointer;
+  position: relative;
+  border-radius: 10px;
+  transition: 0.5s;
+  margin: 1%;
+}
+
+/* кнопка вверх / домой */
+.gohome {
+  display: block;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 199;
+  border: none;
+  background: linear-gradient(-45deg, rgba(255, 107, 107, 0.95) 0%, rgba(254, 180, 123, 0.95) 50%);
+  cursor: pointer;
+  padding: 12px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px var(--color2);
+  transition: 0.2s;
+  -webkit-backdrop-filter: blur(15px); /* Вендорный префикс для Safari и Safari на iOS */
+  backdrop-filter: blur(15px);         /* Стандартное свойство */
+
+  &:active {
+    transition: 0.2s;
+    background-color: var(--color1);
+    transform: scale(1.2);
+  }
+}
+
+/* текст где данные что за страница (year и category) */
+.info{
+  margin-top: 2%;
+  color: var(--color2);
+  font-weight: 550;
+  font-size: 1rem;
+  text-align: center;
+  
+  &.anim {
+    opacity: 0.2;
+  }
+}
+
+.sort-block {
+  margin-left: 1rem;
+  color: var(--color2);
+  font-weight: 450;
+  font-size: 0.7rem;
+  
+  &.anim {
+    opacity: 0.2;
+  }
+}
+#sort-toggle {
+  color: var(--color2);
+}
+
+.auth {
+  font-family: Arial, sans-serif;
+  background-color: var(--body-bg); /* Темный фон */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100dvh;
+  margin: 0;
+  padding: 20px; /* Отступы от краев экрана */
+  box-sizing: border-box;
+  color: var(--body-color); /* Светлый текст */
+}
+
+.auth-container {
+  background-color: #2d2d2d; /* Темный контейнер */
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  width: 100%;
+  max-width: 350px; /* Ограничение ширины для больших экранов */
+}
+
+h1 {
+  font-size: 1.2rem;
+  margin-bottom: 25px;
+  color: var(--body-color); /* Белый заголовок */
+}
+
+.auth-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  color: #fff;
+  width: 100%; /* Кнопки на всю ширину */
+  box-sizing: border-box;
+}
+
+.auth-button.google {
+  background-color: rgba(0, 50, 255, 0.4);
+  color: white;
+}
+
+.auth-button.yandex {
+  background-color: rgba(255, 0, 0, 0.4);
+  color: white;
+}
+
+.auth-button img {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.auth-button.google:active {
+  background-color:rgb(66, 133, 244);
+}
+.auth-button.yandex:active {
+  background-color:rgb(255, 204, 0);
+}
